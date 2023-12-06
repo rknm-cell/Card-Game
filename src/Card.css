@@ -1,0 +1,5 @@
+.card-face{
+    flex-direction: row;
+    
+    width: 100px;
+}

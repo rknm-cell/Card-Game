@@ -5,11 +5,14 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Games from "./Games";
 import LandingPage from "./LandingPage";
+import Blackjack from "./Blackjack";
 
 function App() {
   const [game, setGame] = useState(null);
-  const [deckNumber, setDeckNumber] = useState(1);
+  const [deckNumber, setDeckNumber] = useState(6);
   const [deckId, setDeckId] = useState(null);
+  const [deck, setDeck] = useState([])
+  const [drawNumber, setDrawNumber] = useState(52 * deckNumber)
 
   useEffect(() => {
     fetch(
@@ -20,16 +23,28 @@ function App() {
       })
       .then(function (data) {
         console.log(data);
-        console.log(data.deck_id)
         setDeckId(data.deck_id);
-      });
+      })
+      .then();
   }, []);
+
+  useEffect(() => {
+    fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=${drawNumber}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      setDeck(data.cards)
+      console.log(deck)
+    })
+  },[deckId])
+  
   return (
     <>
       
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
-        <Route path="/games" element={<Games deck={deckId}/>} />
+        <Route path="/games" element={<Games deck={deck}/>} />
+        <Route path="/blackjack" element={<Blackjack deck={deck}/>}/>
       </Routes>
     </>
   );
