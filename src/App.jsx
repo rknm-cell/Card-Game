@@ -1,40 +1,38 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Games from "./Games";
+import LandingPage from "./LandingPage";
 
 function App() {
-  const [game, setGame] = useState(null)
-  const [deckNumber, setDeckNumber] = useState(1)
-  const [deckId, setDeckId] = useState(null)
-  
+  const [game, setGame] = useState(null);
+  const [deckNumber, setDeckNumber] = useState(1);
+  const [deckId, setDeckId] = useState(null);
 
-  useEffect(()=>{
-    fetch(`https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${deckNumber}`)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data)
-    setDeckId(data.id);
-  })
-  },[])
+  useEffect(() => {
+    fetch(
+      `https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${deckNumber}`
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        console.log(data.deck_id)
+        setDeckId(data.deck_id);
+      });
+  }, []);
   return (
     <>
-    <h1>Card Game!</h1>
-    <Route
-            path="/products"
-            element={
-              <ProductGrid
-                searchInput={searchInput}
-                onSearch={onSearch}
-                wines={filteredWines}
-                user={user}
-                session={session}
-              />
       
+      <Routes>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/games" element={<Games deck={deckId}/>} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

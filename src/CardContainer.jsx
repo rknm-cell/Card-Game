@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 
 const CardContainer = () => {
 const [draw, setDraw] = useState(null)
-function handleCardRender(){
-    return (
+// function handleCardRender(){
+//     return (
         
-    )
-}
+//     )
+// }
   return (
    <Card/>
   )

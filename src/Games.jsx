@@ -1,9 +1,10 @@
 import React from 'react'
+import Blackjack from './Blackjack'
 
 const Games = () => {
-    
+
   return (
-    <div>Games</div>
+    <Blackjack />
   )
 }
 
