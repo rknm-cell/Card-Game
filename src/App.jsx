@@ -14,19 +14,19 @@ function App() {
   const [deck, setDeck] = useState([])
   const [drawNumber, setDrawNumber] = useState(52 * deckNumber)
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${deckNumber}`
-  //   )
-  //     .then(function (response) {
-  //       return response.json();
-  //     })
-  //     .then(function (data) {
-  //       console.log(data);
-  //       setDeckId(data.deck_id);
-  //     })
-  //     .then();
-  // }, []);
+  useEffect(() => {
+    fetch(
+      `https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${deckNumber}`
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        setDeckId(data.deck_id);
+      })
+      .then();
+  }, []);
 
   // useEffect(() => {
   //   if (deck != []){
