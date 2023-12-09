@@ -48,7 +48,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/games" element={<Games deck={deck}/>} />
-        <Route path="/blackjack" element={<Blackjack deck={deck}/>}/>
+        <Route path="/blackjack" element={<Blackjack deckId={deckId}/>}/>
       </Routes>
     </>
   );
