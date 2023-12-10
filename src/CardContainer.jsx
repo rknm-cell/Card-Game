@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const CardContainer = ({ deckId, drawNumber, turn }) => {
+const CardContainer = ({ deck, drawNumber, turn, draw }) => {
   const [hand, setHand] = useState([]);
-const [cardsDrawn, setCardsDrawn] = useState([])
-  // function handleDraw(){
-  //     setHand(deck.splice(0, drawNumber))
-  // }
+  const [score, setScore] = useState(0);
+    function handleCardDraw(){
+        setHand(deck.splice(0, draw)) 
+    }
 
-  //   const [cardsDrawn, setCardsDrawn] = useState();
-  //   console.log(deckId);
-  //   console.log(drawNumber);
-
-  useEffect(() => {
-    fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=${drawNumber}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        console.log(data.cards);
-        setHand(data.cards);
-      });
-  }, []);
 
   function handleCardRender() {
     return hand.map((card) => (
-      <Card key={card.code} image={card.image} value={card.value} />
+      <Card
+        key={card.code}
+        image={card.image}
+        value={card.value}
+        updateScore={() => handleScoreUpdate(card)}
+      />
     ));
   }
+ 
+
   return (
     <>
-      {/* {handleDraw()} */}
+    
       {handleCardRender()}
+      
     </>
   );
 };

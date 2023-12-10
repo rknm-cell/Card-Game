@@ -15,32 +15,42 @@ function App() {
   const [drawNumber, setDrawNumber] = useState(52 * deckNumber)
 
   useEffect(() => {
-    fetch(
-      `https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${deckNumber}`
-    )
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        setDeckId(data.deck_id);
-      })
-      .then();
+    let isMounted = true;
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${deckNumber}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch data from the API');
+        }
+
+        const data = await response.json();
+
+        // Check if the component is still mounted before updating state
+        if (isMounted) {
+          console.log(data)
+          setDeckId(data.deck_id);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+        // You may want to handle errors, e.g., set an error state
+      }
+    };
+
+    fetchData();
+
+    // Cleanup function to set isMounted to false when the component unmounts
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  // useEffect(() => {
-  //   if (deck != []){
-  //   fetch(`https://www.deckofcardsapi.com/api/deck/kod6wv5zzot0/draw/?count=${drawNumber}`)
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     console.log(data)
-  //     setDeck(data.cards)
-  //     console.log(deck)
-  //   })}
-  //   else {
-  //     console.log(deck)
-  //   }
-  // },[])
+ 
+
+ 
+
+  
   
   return (
     <>
@@ -48,7 +58,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/games" element={<Games deck={deck}/>} />
-        <Route path="/blackjack" element={<Blackjack deckId={deckId}/>}/>
+        <Route path="/blackjack"  element={<Blackjack deckId={deckId}/>}/>
       </Routes>
     </>
   );
