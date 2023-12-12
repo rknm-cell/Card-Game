@@ -7,7 +7,7 @@ const Blackjack = ({ deckId }) => {
   const [drawNumber, setDrawNumber] = useState(2);
   const [playerScore, setPlayerScore] = useState(0);
   const [dealerScore, setDealerScore] = useState(0);
-  const [turn, setTurn] = useState(1)
+  const [turn, setTurn] = useState(0)
   const [draw, setDraw] = useState(true)
   const [deck, setDeck] = useState([])
   console.log(drawNumber)
@@ -21,6 +21,11 @@ const Blackjack = ({ deckId }) => {
       console.error('Error drawing cards:', error);
     }
   };
+
+  function handleGameStart(){
+    setTurn(1);
+    setDraw(2);
+  }
 
   return (
     <>
@@ -36,9 +41,11 @@ const Blackjack = ({ deckId }) => {
         <CardContainer turn={turn} drawNumber={drawNumber} draw={draw} deck={deck}/>
         <h1>Player: {playerScore}</h1>
       </div> </>
-      : <>
+      : <div className="button-div">
+        <button onClick={handleGameStart()}>Start Game</button>
+        </div>
       
-      </> }
+       }
       
     </>
   );

@@ -15,7 +15,7 @@ const CardContainer = ({ deck, drawNumber, turn, draw }) => {
         key={card.code}
         image={card.image}
         value={card.value}
-        updateScore={() => handleScoreUpdate(card)}
+        updateScore={() => handleScoreUpdate(card.value)}
       />
     ));
   }

@@ -14,6 +14,8 @@ function App() {
   const [deck, setDeck] = useState([])
   const [drawNumber, setDrawNumber] = useState(52 * deckNumber)
 
+
+  // maybe add a mount check so that the useeffect doesn't run if the 
   useEffect(() => {
     let isMounted = true;
 
