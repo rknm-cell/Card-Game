@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Games from "./Games";
 import LandingPage from "./LandingPage";
 import Blackjack from "./Blackjack";
+import NavBar from "./NavBar";
 
 function App() {
   const [game, setGame] = useState(null);
@@ -56,7 +57,7 @@ function App() {
   
   return (
     <>
-      
+      <NavBar/>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/games" element={<Games deck={deck}/>} />
