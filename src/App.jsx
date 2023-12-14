@@ -57,7 +57,7 @@ function App() {
   
   return (
     <>
-      <NavBar/>
+      {/* <NavBar/> */}
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/games" element={<Games deck={deck}/>} />
